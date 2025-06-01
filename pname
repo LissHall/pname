@@ -179,9 +179,8 @@ case "$1" in
         echo "Project Path Manager - Usage:"
         echo "  pname add NAME [PATH]   # Add new path (uses current dir if PATH omitted)"
         echo "  pname ls                # List all paths"
-        echo "  pname cd NAME           # Change to specified path (prints path in quotes)"
+        echo "  . pname cd NAME         # Change to specified path (prints path in quotes)"
         echo "  pname rm NAME           # Delete specific path record"
         echo "  pname rm _all           # Delete ALL stored paths (requires confirmation)"
-        exit 1
         ;;
 esac
