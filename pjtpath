@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Project Path Manager
 # Xinya HAO (HALL). Version 1.0. 1jun2025.
 
 # Configuration file path
@@ -9,9 +8,18 @@ CONFIG_FILE="$HOME/.pjtpath"
 case "$1" in
     add)
         # Add new path record
-        if [ -z "$2" ] || [ -z "$3" ]; then
-            echo "Usage: pjtpath add NAME 'PATH'"
+        if [ -z "$2" ]; then
+            echo "Usage: pjtpath add NAME [PATH]"
+            echo "If PATH is omitted, the current directory is used."
             exit 1
+        fi
+        
+        # Determine path to store (current directory if none provided)
+        if [ -z "$3" ]; then
+            target_path=$(pwd)
+            echo "Using current directory: '$target_path'"
+        else
+            target_path="$3"
         fi
         
         # Check if name already exists
@@ -21,14 +29,14 @@ case "$1" in
         fi
         
         # Verify path exists
-        if [ ! -d "$3" ]; then
-            echo "Error: Path does not exist or is not a directory: $3"
+        if [ ! -d "$target_path" ]; then
+            echo "Error: Path does not exist or is not a directory: '$target_path'"
             exit 1
         fi
         
         # Store name and path (without extra quotes)
-        echo "$2 $3" >> "$CONFIG_FILE"
-        echo "Added: $2 -> $3"
+        echo "$2 $target_path" >> "$CONFIG_FILE"
+        echo "Added: $2 -> '$target_path'"
         ;;
     
     ls)
@@ -96,7 +104,7 @@ case "$1" in
     *)
         # Display help information
         echo "Project Path Manager - Usage:"
-        echo "  pjtpath add NAME 'PATH'   # Add new path"
+        echo "  pjtpath add NAME [PATH]   # Add new path (uses current dir if PATH omitted)"
         echo "  pjtpath ls                # List all paths"
         echo "  pjtpath cd NAME           # Change to specified path (prints path in quotes)"
         echo "  pjtpath rm NAME           # Delete specified path record"
