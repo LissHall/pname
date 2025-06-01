@@ -1,15 +1,16 @@
-# pjtpath - Project Path Manager on MacOS & Linux
+# pname - Project Path Manager on MacOS & Linux
 ## Usage
 
 ```sh
-  pjtpath add NAME 'PATH'   # Add new path
-  pjtpath ls                # List all paths
-  pjtpath cd NAME           # Change to specified path (prints path in quotes)
-  pjtpath rm NAME           # Delete specified path record
+  pname add NAME [PATH]   # Add new path (uses current dir if PATH omitted)
+  pname ls                # List all paths
+  pname cd NAME           # Change to specified path (prints path in quotes)
+  pname rm NAME           # Delete specific path record
+  pname rm _all           # Delete ALL stored paths (requires confirmation)
 ```
 
 ## Install
 ```sh
-sudo mv pjtpath /usr/local/bin/pjtpath
-sudo chmod +x /usr/local/bin/pjtpath
+sudo mv pname /usr/local/bin/pname
+sudo chmod +x /usr/local/bin/pname
 ```
