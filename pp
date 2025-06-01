@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Xinya HAO (HALL). Version 1.0. 1jun2025.
-# Project Path Manager
 
 # Configuration file path
 CONFIG_FILE="$HOME/.pjtpath"
