@@ -9,5 +9,7 @@
 ```
 
 ## Install
+```sh
 sudo mv pjtpath /usr/local/bin/pjtpath
 sudo chmod +x /usr/local/bin/pjtpath
+```
