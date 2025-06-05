@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Version 1.1. 5jun2025. Add `c`
 # Xinya HAO (HALL). Version 1.0. 1jun2025.
 
 # Configuration file path
@@ -81,6 +82,45 @@ case "$1" in
             path="${line#* }"
             printf "%-15s -> %s\n" "$name" "$path"
         done < "$CONFIG_FILE"
+        ;;
+
+    c)
+        # Copy specified path to clipboard
+        if [ -z "$2" ]; then
+            echo "Usage: pjtpath c NAME"
+            exit 1
+        fi
+        
+        # Prevent reserved name _all
+        if [ "$2" = "_all" ]; then
+            echo "Error: '_all' is a reserved command, not a path name"
+            exit 1
+        fi
+        
+        # Extract path from config
+        target_path=$(get_path "$2")
+        
+        if [ -z "$target_path" ]; then
+            echo "Error: No path found for name: $2"
+            exit 1
+        fi
+        
+        # Copy to clipboard using platform-specific tools
+        if command -v pbcopy >/dev/null; then
+            # macOS
+            echo -n "$target_path" | pbcopy
+        elif command -v xclip >/dev/null; then
+            # Linux
+            echo -n "$target_path" | xclip -selection clipboard
+        elif command -v clip.exe >/dev/null; then
+            # WSL (Windows Subsystem for Linux)
+            echo -n "$target_path" | clip.exe
+        else
+            echo "Error: No clipboard utility found (pbcopy/xclip/clip.exe)"
+            exit 1
+        fi
+        
+        echo "Copied to clipboard: $target_path"
         ;;
     
     cd)
@@ -180,6 +220,7 @@ case "$1" in
         echo "  pname add NAME [PATH]   # Add new path (uses current dir if PATH omitted)"
         echo "  pname ls                # List all paths"
         echo "  . pname cd NAME         # Change to specified path (prints path in quotes)"
+        echo "  pname c NAME            # Copy quoted path to clipboard"
         echo "  pname rm NAME           # Delete specific path record"
         echo "  pname rm _all           # Delete ALL stored paths (requires confirmation)"
         ;;
