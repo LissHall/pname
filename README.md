@@ -7,6 +7,7 @@ Project Path Manager - Usage:
     pname ls                # List all paths
     . pname cd NAME         # Change to specified path (prints path in quotes). 
                             # Note: Use `.` or `source`
+    pname c NAME            # Copy quoted path to clipboard
     pname rm NAME           # Delete specific path record
     pname rm _all           # Delete ALL stored paths (requires confirmation)
 ```
