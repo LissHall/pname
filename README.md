@@ -12,6 +12,12 @@ Project Path Manager - Usage:
     pname rm _all           # Delete ALL stored paths (requires confirmation)
 ```
 
+## Download
+```sh
+cd Downloads
+curl -o pname https://raw.githubusercontent.com/LissHall/pname/refs/heads/main/pname
+```
+
 ## Install
 ```sh
 sudo mv pname /usr/local/bin/pname
